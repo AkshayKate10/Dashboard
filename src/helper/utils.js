@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 export const cards = [
   {
-    user: "Akshay",
+    user: "Akshay Nivratti Kate",
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout", "important"],
@@ -9,7 +9,7 @@ export const cards = [
     cardKey: v4(),
   },
   {
-    user: "Suyash",
+    user: "Suyash Kate",
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout", "high priority"],
@@ -99,4 +99,11 @@ export const isAllowedFrom = (currentStatus, newStatus, allowedFrom) => {
   const currentColumn = getAllowedList.statusAllowedToDrop;
   if (currentColumn.includes(newStatus)) return true;
   return false;
+};
+
+export const getUserName = (name) => {
+  const nameArr = name.split(" ");
+  const firstLetters = nameArr.map((letter) => letter[0]);
+  if (firstLetters.length > 2) firstLetters.length = 2;
+  return firstLetters.join("");
 };

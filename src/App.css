@@ -54,12 +54,11 @@
 }
 
 .card {
-  margin: 0.5rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   border: 1px solid;
   height: 10rem;
   background-color: white;
-
 }
 
 .card-title {
@@ -68,17 +67,17 @@
   text-wrap: wrap;
   margin-bottom: 10px;
   text-align: left;
+  flex: auto;
 }
 
-.card-description{
+.card-description {
   font-weight: light;
   font-size: large;
   text-wrap: wrap;
-  margin-bottom: 10px;
   text-align: left;
 }
 
-.tags{
+.tags {
   display: inline-block;
   background-color: lightgrey;
   color: rgb(15, 15, 13);
@@ -90,8 +89,31 @@
   padding: 5px;
   text-align: left;
 }
+
+.user {
+  border: 1px solid #ddd;
+  padding: 10px 16px 0px 0px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+.card-delete {
+  text-align: left;
+  display: inline-block;
+  width:22px;
+  height: 22px;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .empty-card {
-  margin: 0.5rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   border: 1px solid;
   height: 10rem;
@@ -99,7 +121,7 @@
   font-size: 50px;
 }
 
-.modal-container{
+.modal-container {
   position: fixed;
   z-index: 1;
   left: 10%;
@@ -109,10 +131,9 @@
   overflow: auto;
   border: 1px solid;
   background-color: rgba(194, 190, 185, 0.9);
-
-  
 }
-.modal-button{
+
+.modal-button {
   width: 10rem;
   height: 2rem;
   font-size: large;

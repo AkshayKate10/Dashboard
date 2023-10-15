@@ -37,19 +37,14 @@ function Main() {
 
     const cardKey = event.dataTransfer.getData("cardKey");
 
-    const newState = allCards.map((item) => {
-      if (item.cardKey === cardKey) {
-        return { ...item, status: newStatus };
-      }
-      return item;
+    dispatch({
+      type: Action.CHANGE_CARD_STATUS,
+      value: { cardKey, newStatus },
     });
-
-    dispatch({ type: Action.CHANGE_CARD_STATUS, value: newState });
   };
   return (
     <div>
       <h1>Task Dashboard</h1>
-      <button onClick={check}>click</button>
       <div className="column-container">
         {columns &&
           columns.map((column, index) => (
