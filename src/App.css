@@ -32,7 +32,89 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.column-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.columns {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid;
+  min-height: 80vh;
+  width: 100%;
+  background-color: lightgray;
+}
+
+.card {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid;
+  height: 10rem;
+  background-color: white;
+
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: larger;
+  text-wrap: wrap;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.card-description{
+  font-weight: light;
+  font-size: large;
+  text-wrap: wrap;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.tags{
+  display: inline-block;
+  background-color: lightgrey;
+  color: rgb(15, 15, 13);
+  border: 1px solid;
+  border-radius: 15px;
+  font-weight: 250;
+  font-size: 12px;
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+}
+.empty-card {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid;
+  height: 10rem;
+  background-color: white;
+  font-size: 50px;
+}
+
+.modal-container{
+  position: fixed;
+  z-index: 1;
+  left: 10%;
+  top: 10%;
+  width: 80%;
+  height: 80%;
+  overflow: auto;
+  border: 1px solid;
+  background-color: rgba(194, 190, 185, 0.9);
+
+  
+}
+.modal-button{
+  width: 10rem;
+  height: 2rem;
+  font-size: large;
+  margin: 1%;
 }
