@@ -64,35 +64,37 @@ export const allColumns = [
     columnName: COLUMNS.TODO,
     color: "blue",
     statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INPROGRESS],
+    shouldDisplay: true,
   },
   {
     columnName: COLUMNS.INPROGRESS,
     color: "orange",
     statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INPROGRESS, COLUMNS.COMPLETED],
+    shouldDisplay: true,
   },
   {
     columnName: COLUMNS.COMPLETED,
     color: "red",
     statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.COMPLETED, COLUMNS.INTEST],
+    shouldDisplay: true,
   },
   {
     columnName: COLUMNS.INTEST,
     color: "purple",
     statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INTEST, COLUMNS.CLOSED],
+    shouldDisplay: true,
   },
   {
     columnName: COLUMNS.CLOSED,
     color: "green",
     statusAllowedToDrop: [COLUMNS.TODO],
+    shouldDisplay: true,
   },
 ];
 
 // {user:'Akshay',title:'Change Label',description:'update layout',tags:'layout'}
 
 export const isAllowedFrom = (currentStatus, newStatus, allowedFrom) => {
-  console.log(currentStatus);
-
-  console.log(allowedFrom);
   const getAllowedList = allowedFrom.find(
     (x) => x.columnName === currentStatus
   );

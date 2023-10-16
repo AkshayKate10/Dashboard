@@ -8,10 +8,8 @@ export function Card(props) {
   const { title, description, tags, user, cardKey, status, columnColor } =
     props;
 
-  console.log(props);
   const dispatch = useDispatch();
   const handleAddCard = () => {
-    console.log("clicked");
     dispatch({ type: SET_IS_MODAL, value: true });
   };
 

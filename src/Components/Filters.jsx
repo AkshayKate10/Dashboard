@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FILTER_CARD, RESET_FILTER } from "../Store/Actions";
 
-function Filters(props) {
+function Filters({ getCurrentFilter }) {
   const dispatch = useDispatch();
   const allCards = useSelector((state) => state.allCards);
-  const state = useSelector((state) => state);
+  const columns = useSelector((state) => state.columns);
 
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedField, setSelectedField] = useState("");
@@ -15,25 +15,40 @@ function Filters(props) {
     if (field === "user") setSelectedUser(e.target.value);
     if (field === "status") setSelectedField(e.target.value);
   };
-
+  getCurrentFilter(selectedUser, selectedField);
   const onSearch = () => {
     dispatch({ type: FILTER_CARD, value: { selectedUser, selectedField } });
-    console.log(state);
   };
 
   const onReset = () => {
     dispatch({ type: RESET_FILTER });
-    console.log(state);
   };
 
-  const renderDropdown = (field) => {
-    const array = allCards
-      .filter((card) => card[`${field}`])
-      .map((card) => card[`${field}`]);
+  const renderUserDropdown = () => {
+    const element = allCards
+      .filter((card) => card["user"])
+      .map((card) => card["user"]);
+    element.unshift("");
+
     return (
-      <select onChange={(event) => handleDropdownChange(event, field)}>
-        {array &&
-          array.map((item, index) => (
+      <select onChange={(event) => handleDropdownChange(event, "user")}>
+        {element &&
+          element.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+      </select>
+    );
+  };
+
+  const renderStatusDropdown = () => {
+    const element = columns.map((column) => column["columnName"]);
+    element.unshift("");
+    return (
+      <select onChange={(event) => handleDropdownChange(event, "status")}>
+        {element &&
+          element.map((item, index) => (
             <option key={index} value={item}>
               {item}
             </option>
@@ -44,8 +59,8 @@ function Filters(props) {
 
   return (
     <div className="filter-container">
-      <div className="filter-dropdown">User Name: {renderDropdown("user")}</div>
-      <div className="filter-dropdown">Status : {renderDropdown("status")}</div>
+      <div className="filter-dropdown">User Name: {renderUserDropdown()}</div>
+      <div className="filter-dropdown">Status : {renderStatusDropdown()}</div>
       <button
         className="filter-button"
         onClick={onSearch}

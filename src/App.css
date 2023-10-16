@@ -146,8 +146,26 @@
 }
 
 .modal-button {
-  width: 10rem;
-  height: 2rem;
+  width: 15rem;
+  height: 3rem;
   font-size: large;
   margin: 1%;
+  background-color: lightblue;
+}
+
+.modal-input-elements{
+  font-size: x-large;
+}
+
+.modal-input-field{
+  width: 50%;
+  height: 3rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.modal-input-container{
+  display: flex;
+  flex-direction: column;
+  left: 0;
 }
