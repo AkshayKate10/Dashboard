@@ -3,12 +3,12 @@ import Card from "./Card";
 // import { useSelector } from "react-redux";
 
 function Columns(props) {
-  const { allCards, columnName, columnColor } = props;
+  const { filteredCards, columnName, columnColor } = props;
   //   console.log(props);
   const getCards = () => {
     let cards =
-      allCards &&
-      allCards
+      filteredCards &&
+      filteredCards
         .filter((card) => {
           if (card.status === columnName) return true;
           return false;

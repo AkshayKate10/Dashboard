@@ -1,11 +1,12 @@
 import { v4 } from "uuid";
+import { STATUS, COLUMNS } from "./constants";
 export const cards = [
   {
     user: "Akshay Nivratti Kate",
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout", "important"],
-    status: "TO-DO",
+    status: STATUS.TODO,
     cardKey: v4(),
   },
   {
@@ -13,15 +14,15 @@ export const cards = [
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout", "high priority"],
-    status: "IN-PROGRESS",
+    status: STATUS.INPROGRESS,
     cardKey: v4(),
   },
   {
-    user: "Atul",
+    user: "Atul Dhotre",
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout"],
-    status: "COMPLETED",
+    status: STATUS.COMPLETED,
     cardKey: v4(),
   },
   {
@@ -29,7 +30,7 @@ export const cards = [
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: [],
-    status: "CLOSED",
+    status: STATUS.CLOSED,
     cardKey: v4(),
   },
   {
@@ -37,7 +38,7 @@ export const cards = [
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout"],
-    status: "IN-TEST",
+    status: STATUS.INTEST,
     cardKey: v4(),
   },
   {
@@ -45,44 +46,44 @@ export const cards = [
     title: "Change Label",
     description: "Update Layout And Correct Name",
     tags: ["Layout"],
-    status: "TO-DO",
+    status: STATUS.TODO,
     cardKey: v4(),
   },
   {
-    user: "",
+    user: null,
     title: "empty_card",
-    description: "",
+    description: null,
     tags: [],
-    status: "TO-DO",
+    status: STATUS.TODO,
     // cardKey: v4(),
   },
 ];
 
 export const allColumns = [
   {
-    columnName: "TO-DO",
+    columnName: COLUMNS.TODO,
     color: "blue",
-    statusAllowedToDrop: ["TO-DO", "IN-PROGRESS"],
+    statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INPROGRESS],
   },
   {
-    columnName: "IN-PROGRESS",
+    columnName: COLUMNS.INPROGRESS,
     color: "orange",
-    statusAllowedToDrop: ["TO-DO", "IN-PROGRESS", "COMPLETED"],
+    statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INPROGRESS, COLUMNS.COMPLETED],
   },
   {
-    columnName: "COMPLETED",
+    columnName: COLUMNS.COMPLETED,
     color: "red",
-    statusAllowedToDrop: ["TO-DO", "COMPLETED", "IN-TEST"],
+    statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.COMPLETED, COLUMNS.INTEST],
   },
   {
-    columnName: "IN-TEST",
+    columnName: COLUMNS.INTEST,
     color: "purple",
-    statusAllowedToDrop: ["TO-DO", "IN-TEST", "CLOSED"],
+    statusAllowedToDrop: [COLUMNS.TODO, COLUMNS.INTEST, COLUMNS.CLOSED],
   },
   {
-    columnName: "CLOSED",
+    columnName: COLUMNS.CLOSED,
     color: "green",
-    statusAllowedToDrop: ["TO-DO"],
+    statusAllowedToDrop: [COLUMNS.TODO],
   },
 ];
 
