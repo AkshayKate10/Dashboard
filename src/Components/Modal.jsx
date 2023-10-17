@@ -15,14 +15,16 @@ function Modal(props) {
     tags: [],
   });
   const handleCloseModal = () => {
+    setInputs({ user: "", title: "", description: "", tags: [] });
     dispatch({ type: SET_IS_MODAL, value: false });
   };
 
   const handleInputChange = (event) => {
     if (event.target.id === "tags") {
-      const splitted = event.target.value.split(",");
+      const splittedTags = event.target.value.split(",");
+
       setInputs((prev) => {
-        return { ...prev, [event.target.id]: splitted };
+        return { ...prev, [event.target.id]: splittedTags };
       });
 
       console.log(event.target.value);
@@ -34,7 +36,14 @@ function Modal(props) {
   };
 
   const handleSubmit = () => {
-    const newCard = { ...inputs, status: STATUS.TODO, cardKey: v4() };
+    const validTags = inputs.tags.filter((tag) => tag);
+
+    const newCard = {
+      ...inputs,
+      tags: validTags,
+      status: STATUS.TODO,
+      cardKey: v4(),
+    };
     allCards.pop();
     allCards.push(newCard, {
       title: "empty_card",

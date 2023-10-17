@@ -1,12 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { SET_IS_MODAL, DELETE_CARD } from "../Store/Actions";
+import { SET_IS_MODAL, DELETE_CARD, FILTER_CARD } from "../Store/Actions";
 import { getUserName } from "../helper/utils";
 import { STATUS } from "../helper/constants";
 
 export function Card(props) {
-  const { title, description, tags, user, cardKey, status, columnColor } =
-    props;
+  const {
+    title,
+    description,
+    tags,
+    user,
+    cardKey,
+    status,
+    columnColor,
+    selectedUser,
+    selectedStatus,
+  } = props;
 
   const dispatch = useDispatch();
   const handleAddCard = () => {
@@ -15,6 +24,10 @@ export function Card(props) {
 
   const handleDeleteCard = (key, status) => {
     dispatch({ type: DELETE_CARD, value: { key, status } });
+    dispatch({
+      type: FILTER_CARD,
+      value: { selectedUser, selectedStatus },
+    });
   };
 
   if (title === "empty_card" && status === STATUS.TODO) {

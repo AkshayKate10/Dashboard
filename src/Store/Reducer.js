@@ -7,6 +7,10 @@ const initialstate = {
   columns: [],
   filteredCards: [],
   isModal: false,
+  filterInputs: {
+    selectedUser: "",
+    selectedStatus: "",
+  },
 };
 
 function reducer(state = initialstate, action) {
@@ -35,7 +39,7 @@ function reducer(state = initialstate, action) {
 
     case _.DELETE_CARD: {
       if (action.value.status === STATUS.CLOSED) return state;
-      let newState = state.filteredCards.filter(
+      let newState = state.allCards.filter(
         (x) => x.cardKey !== action.value.key
       );
       console.log(action, state, newState);
@@ -43,7 +47,7 @@ function reducer(state = initialstate, action) {
     }
 
     case _.CHANGE_CARD_STATUS: {
-      const newState = state.al.map((item) => {
+      const newState = state.allCards.map((item) => {
         if (item.cardKey === action.value.cardKey) {
           return { ...item, status: action.value.newStatus };
         }
@@ -52,25 +56,31 @@ function reducer(state = initialstate, action) {
       return { ...state, allCards: newState, filteredCards: newState };
     }
 
+    case _.SET_FILTER_INPUTS:
+      return { ...state, filterInputs: action.value };
+
     case _.FILTER_CARD: {
+      const {
+        value: { selectedUser, selectedStatus },
+      } = action;
       let newState;
-      if (action.value.selectedUser && action.value.selectedField) {
-        newState = state.allCards.filter((item) => {
-          if (
-            item.user === action.value.selectedUser &&
-            item.status === action.value.selectedField
-          )
+      if (selectedUser && selectedStatus) {
+        newState = state.allCards.filter((card) => {
+          if (card.user === selectedUser && card.status === selectedStatus)
             return true;
+          if (card.title === "empty_card") return true;
           return false;
         });
-      } else if (action.value.selectedUser) {
-        newState = state.allCards.filter((item) => {
-          if (item.user === action.value.selectedUser) return true;
+      } else if (selectedUser) {
+        newState = state.allCards.filter((card) => {
+          if (card.user === selectedUser) return true;
+          if (card.title === "empty_card") return true;
           return false;
         });
-      } else if (action.value.selectedField) {
-        newState = state.allCards.filter((item) => {
-          if (item.status === action.value.selectedField) return true;
+      } else if (selectedStatus) {
+        newState = state.allCards.filter((card) => {
+          if (card.status === selectedStatus) return true;
+          if (card.title === "empty_card") return true;
           return false;
         });
       } else {
@@ -78,17 +88,14 @@ function reducer(state = initialstate, action) {
       }
       return { ...state, filteredCards: newState };
     }
+    // return { ...state, filteredCards: action.value };
 
     case _.RESET_FILTER:
-      return { ...state, filteredCards: state.allCards };
-
-    case _.MERGE_COLUMN_CONFIG: {
-      const customColumns = action.value.customColumn.map((x) => x.columnName);
-
-      const currentColumns = [...state.columns, ...action.value.customColumn];
-      console.log(action.value, currentColumns, customColumns);
-      return { ...state, columns: currentColumns };
-    }
+      return {
+        ...state,
+        filteredCards: state.allCards,
+        filterInputs: { selectedStatus: "", selectedUser: "" },
+      };
 
     default:
       return state;

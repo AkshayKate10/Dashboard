@@ -8,32 +8,51 @@ function Filters({ getCurrentFilter }) {
   const columns = useSelector((state) => state.columns);
 
   const [selectedUser, setSelectedUser] = useState("");
-  const [selectedField, setSelectedField] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   const handleDropdownChange = (e, field) => {
+    const action = {
+      type: FILTER_CARD,
+      value: {
+        selectedUser,
+        selectedStatus,
+      },
+    };
+    console.log(field);
+    if (field === "user") {
+      action.value.selectedUser = e.target.value;
+    }
+    if (field === "status") {
+      action.value.selectedStatus = e.target.value;
+    }
+    dispatch(action);
     console.log(field);
     if (field === "user") setSelectedUser(e.target.value);
-    if (field === "status") setSelectedField(e.target.value);
+    if (field === "status") setSelectedStatus(e.target.value);
+    dispatch(action);
   };
-  getCurrentFilter(selectedUser, selectedField);
-  const onSearch = () => {
-    dispatch({ type: FILTER_CARD, value: { selectedUser, selectedField } });
-  };
+  getCurrentFilter(selectedUser, selectedStatus);
 
   const onReset = () => {
     dispatch({ type: RESET_FILTER });
+    setSelectedStatus("");
+    setSelectedUser("");
   };
 
   const renderUserDropdown = () => {
     const element = allCards
       .filter((card) => card["user"])
       .map((card) => card["user"]);
-    element.unshift("");
+    element.unshift("ALL");
+    const uniqueElements = [...new Set(element)];
 
     return (
-      <select onChange={(event) => handleDropdownChange(event, "user")}>
-        {element &&
-          element.map((item, index) => (
+      <select
+        value={selectedUser}
+        onChange={(event) => handleDropdownChange(event, "user")}
+      >
+        {uniqueElements &&
+          uniqueElements.map((item, index) => (
             <option key={index} value={item}>
               {item}
             </option>
@@ -44,9 +63,12 @@ function Filters({ getCurrentFilter }) {
 
   const renderStatusDropdown = () => {
     const element = columns.map((column) => column["columnName"]);
-    element.unshift("");
+    element.unshift("ALL");
     return (
-      <select onChange={(event) => handleDropdownChange(event, "status")}>
+      <select
+        value={selectedStatus}
+        onChange={(event) => handleDropdownChange(event, "status")}
+      >
         {element &&
           element.map((item, index) => (
             <option key={index} value={item}>
@@ -61,13 +83,6 @@ function Filters({ getCurrentFilter }) {
     <div className="filter-container">
       <div className="filter-dropdown">User Name: {renderUserDropdown()}</div>
       <div className="filter-dropdown">Status : {renderStatusDropdown()}</div>
-      <button
-        className="filter-button"
-        onClick={onSearch}
-        disabled={!(selectedUser || selectedField)}
-      >
-        Search
-      </button>
       <button className="filter-button" onClick={onReset}>
         Reset
       </button>

@@ -15,7 +15,36 @@ function Main() {
   const [currentStatus, setCurrentStatus] = useState(null);
   const [filteredCards, setFilteredCards] = useState(null);
   const [selectedUser, setSelectedUser] = useState("");
-  const [selectedField, setSelectedField] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+
+  const getMergedColumnsList = (allColumns, customColumn) => {
+    let newConfig = [...allColumns];
+
+    for (let i = 0; i < customColumn.length; i++) {
+      const isColumnExists = Boolean(
+        newConfig.find(
+          (column) => column.columnName === customColumn[i].columnName
+        )
+      );
+      if (isColumnExists) {
+        // handling overriding or modifying base configs
+        const updatedColumnList = newConfig.map((column) => {
+          if (column.columnName === customColumn[i].columnName) {
+            return { ...column, ...customColumn[i] };
+          }
+          return column;
+        });
+        newConfig = updatedColumnList;
+        dispatch({ type: Action.SET_COLUMNS, value: updatedColumnList });
+      } else {
+        // handling addition of new columns
+        newConfig.push(customColumn[i]);
+        dispatch({ type: Action.SET_COLUMNS, value: newConfig });
+      }
+    }
+
+    // all.forEach(getNewColumns);
+  };
 
   useEffect(() => {
     console.log("called");
@@ -23,10 +52,10 @@ function Main() {
     (async () => {
       const getColumns = await fetch("http://localhost:5000/api/columns"); // get user defined customization
       const getCards = await fetch("http://localhost:5000/api/cards"); // get user defined cards
-      const customColumn = await getColumns.json();
+      const { customColumn } = await getColumns.json();
       const { cards } = await getCards.json();
 
-      // const mergedColumsList = getMergedColumnsList(allColumns, customColumn);
+      getMergedColumnsList(allColumns, customColumn);
 
       console.log(customColumn, cards);
       dispatch({ type: Action.SET_ALL_CARDS, value: cards });
@@ -51,9 +80,9 @@ function Main() {
     event.preventDefault();
   };
 
-  const getCurrentFilter = (selectedUser, selectedField) => {
+  const getCurrentFilter = (selectedUser, selectedStatus) => {
     setSelectedUser(selectedUser);
-    setSelectedField(selectedField);
+    setSelectedStatus(selectedStatus);
   };
 
   const handleDrop = (event, newStatus) => {
@@ -68,7 +97,7 @@ function Main() {
     });
     dispatch({
       type: Action.FILTER_CARD,
-      value: { selectedUser, selectedField },
+      value: { selectedUser, selectedStatus },
     });
   };
 
@@ -88,6 +117,8 @@ function Main() {
                   handleDragStart={handleDragStart}
                   handleDragOver={handleDragOver}
                   handleDrop={handleDrop}
+                  selectedUser={selectedUser}
+                  selectedStatus={selectedStatus}
                   key={index}
                 />
               );

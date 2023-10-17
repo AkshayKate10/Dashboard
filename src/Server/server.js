@@ -8,17 +8,22 @@ const customColumn = [
   {
     columnName: "COMPLETED",
     color: "#14FDBD",
-    statusAllowedToDrop: ["TO-DO", "COMPLETED", "IN-TEST"],
-    shouldDisplay: true,
+    // statusAllowedToDrop: ["TO-DO", "COMPLETED", "IN-TEST"],
+    // shouldDisplay: true,
   },
   {
     columnName: "CLOSED",
     shouldDisplay: false,
   },
   {
-    columnName: "XYZ",
-    color: "#14FDBD",
-    statusAllowedToDrop: ["TO-DO", "COMPLETED", "IN-TEST"],
+    columnName: "REOPENED",
+    color: "pink",
+    statusAllowedToDrop: ["TO-DO"],
+    shouldDisplay: true,
+  },
+  {
+    columnName: "IN-TEST",
+    statusAllowedToDrop: ["TO-DO", "REOPENED"],
     shouldDisplay: true,
   },
 ];
