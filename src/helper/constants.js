@@ -5,11 +5,3 @@ export const STATUS = {
   INTEST: "IN-TEST",
   CLOSED: "CLOSED",
 };
-
-export const COLUMNS = {
-  TODO: "TO-DO",
-  INPROGRESS: "IN-PROGRESS",
-  COMPLETED: "COMPLETED",
-  INTEST: "IN-TEST",
-  CLOSED: "CLOSED",
-};

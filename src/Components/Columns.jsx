@@ -1,10 +1,8 @@
 import React from "react";
 import Card from "./Card";
-// import { useSelector } from "react-redux";
 
 function Columns(props) {
   const { filteredCards, columnName, columnColor } = props;
-  //   console.log(props);
   const getCards = () => {
     let cards =
       filteredCards &&
@@ -14,7 +12,6 @@ function Columns(props) {
           return false;
         })
         .map((card, index) => {
-          //   console.log("column props", card);
           return (
             <div key={index}>
               <Card
@@ -28,6 +25,7 @@ function Columns(props) {
         });
     return cards;
   };
+
   return (
     <div
       className="columns"

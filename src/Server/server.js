@@ -1,77 +1,8 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
-// const allColumns = require("./mock");
-// import allColumns from "./mock";
 
-const customColumn = [
-  {
-    columnName: "COMPLETED",
-    color: "#14FDBD",
-    // statusAllowedToDrop: ["TO-DO", "COMPLETED", "IN-TEST"],
-    // shouldDisplay: true,
-  },
-  {
-    columnName: "CLOSED",
-    shouldDisplay: false,
-  },
-  {
-    columnName: "REOPENED",
-    color: "pink",
-    statusAllowedToDrop: ["TO-DO"],
-    shouldDisplay: true,
-  },
-  {
-    columnName: "IN-TEST",
-    statusAllowedToDrop: ["TO-DO", "REOPENED"],
-    shouldDisplay: true,
-  },
-];
-
-const cards = [
-  {
-    user: "Akshay Nivratti Kate",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: ["Layout", "important"],
-    status: "TO-DO",
-  },
-  {
-    user: "Suyash Kate",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: ["Layout", "high priority"],
-    status: "IN-PROGRESS",
-  },
-  {
-    user: "Atul Dhotre",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: ["Layout"],
-    status: "COMPLETED",
-  },
-  {
-    user: "Katke",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: [],
-    status: "CLOSED",
-  },
-  {
-    user: "Sagar",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: ["Layout"],
-    status: "IN-TEST",
-  },
-  {
-    user: "Ninad",
-    title: "Change Label",
-    description: "Update Layout And Correct Name",
-    tags: ["Layout"],
-    status: "TO-DO",
-  },
-];
+const { customColumn, cards } = require("./customConfigurations");
 
 // Allow CORS for all routes
 app.use((req, res, next) => {

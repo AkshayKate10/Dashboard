@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { SET_IS_MODAL, DELETE_CARD, FILTER_CARD } from "../Store/Actions";
-import { getUserName } from "../helper/utils";
-import { STATUS } from "../helper/constants";
+import { getUserName } from "../Helper/utils";
+import { STATUS } from "../Helper/constants";
 
 export function Card(props) {
   const {

@@ -1,6 +1,6 @@
 import * as _ from "./Actions";
 import { v4 } from "uuid";
-import { STATUS } from "../helper/constants";
+import { STATUS } from "../Helper/constants";
 
 const initialstate = {
   allCards: [],
@@ -42,7 +42,6 @@ function reducer(state = initialstate, action) {
       let newState = state.allCards.filter(
         (x) => x.cardKey !== action.value.key
       );
-      console.log(action, state, newState);
       return { ...state, allCards: newState, filteredCards: newState };
     }
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as Action from "../Store/Actions";
-import Columns from "./Columns";
-import { allColumns, isAllowedFrom } from "../helper/utils";
+import { isAllowedFrom } from "../Helper/utils";
+import { allColumns } from "../Configuration/BasicConfigurations";
+
+//Components
 import Modal from "./Modal";
 import Filters from "./Filters";
+import Columns from "./Columns";
 
 function Main() {
   const dispatch = useDispatch();
@@ -42,12 +45,9 @@ function Main() {
         dispatch({ type: Action.SET_COLUMNS, value: newConfig });
       }
     }
-
-    // all.forEach(getNewColumns);
   };
 
   useEffect(() => {
-    console.log("called");
     dispatch({ type: Action.SET_COLUMNS, value: allColumns });
     (async () => {
       const getColumns = await fetch("http://localhost:5000/api/columns"); // get user defined customization
@@ -57,12 +57,7 @@ function Main() {
 
       getMergedColumnsList(allColumns, customColumn);
 
-      console.log(customColumn, cards);
       dispatch({ type: Action.SET_ALL_CARDS, value: cards });
-
-      //dispatch({ type: Action.SET_COLUMNS, value: mergedColumsList });
-
-      // dispatch({ type: Action.MERGE_COLUMN_CONFIG, value: customColumn });
     })();
   }, []);
 
@@ -122,8 +117,6 @@ function Main() {
                   key={index}
                 />
               );
-            } else {
-              return;
             }
           })}
         <Modal />

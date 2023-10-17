@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_IS_MODAL, ADD_CARD } from "../Store/Actions";
-import { STATUS } from "../helper/constants";
+import { STATUS } from "../Helper/constants";
 import { v4 } from "uuid";
 
-function Modal(props) {
+function Modal() {
   const isModal = useSelector((state) => state.isModal);
   const allCards = useSelector((state) => state.allCards);
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ function Modal(props) {
     description: "",
     tags: [],
   });
+
   const handleCloseModal = () => {
     setInputs({ user: "", title: "", description: "", tags: [] });
     dispatch({ type: SET_IS_MODAL, value: false });
@@ -26,8 +27,6 @@ function Modal(props) {
       setInputs((prev) => {
         return { ...prev, [event.target.id]: splittedTags };
       });
-
-      console.log(event.target.value);
     } else {
       setInputs((prev) => {
         return { ...prev, [event.target.id]: event.target.value };
@@ -55,7 +54,9 @@ function Modal(props) {
     dispatch({ type: ADD_CARD, value: allCards });
     dispatch({ type: SET_IS_MODAL, value: false });
   };
+
   if (!isModal) return null;
+
   return (
     <div className="modal-container">
       <h2> Add Tasks</h2>

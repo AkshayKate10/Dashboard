@@ -18,7 +18,6 @@ function Filters({ getCurrentFilter }) {
         selectedStatus,
       },
     };
-    console.log(field);
     if (field === "user") {
       action.value.selectedUser = e.target.value;
     }
@@ -26,11 +25,11 @@ function Filters({ getCurrentFilter }) {
       action.value.selectedStatus = e.target.value;
     }
     dispatch(action);
-    console.log(field);
     if (field === "user") setSelectedUser(e.target.value);
     if (field === "status") setSelectedStatus(e.target.value);
     dispatch(action);
   };
+
   getCurrentFilter(selectedUser, selectedStatus);
 
   const onReset = () => {
