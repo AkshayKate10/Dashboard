@@ -98,7 +98,7 @@ function Main() {
 
   return (
     <div>
-      <h1>Task Dashboard</h1>
+      <h1 data-testid="app-header">Task Dashboard</h1>
       <Filters getCurrentFilter={getCurrentFilter} />
       <div className="column-container">
         {columns &&

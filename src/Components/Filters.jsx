@@ -80,9 +80,17 @@ function Filters({ getCurrentFilter }) {
 
   return (
     <div className="filter-container">
-      <div className="filter-dropdown">User Name: {renderUserDropdown()}</div>
-      <div className="filter-dropdown">Status : {renderStatusDropdown()}</div>
-      <button className="filter-button" onClick={onReset}>
+      <div className="filter-dropdown" data-testid="user-dropdown">
+        User Name: {renderUserDropdown()}
+      </div>
+      <div className="filter-dropdown" data-testid="status-dropdown">
+        Status : {renderStatusDropdown()}
+      </div>
+      <button
+        className="filter-button"
+        data-testid="reset-button"
+        onClick={onReset}
+      >
         Reset
       </button>
     </div>
