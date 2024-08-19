@@ -14,10 +14,10 @@ Runs Server of this application on port:5000
 
 - To create docker image
 
-### docker build -t task-dashboard:1 .
+### `docker build -t task-dashboard:1 .`
 
 - To run docker image
 
-### docker run -p 8000:8000 -p 5000:5000 task-dashboard:1
+### `docker run -p 8000:8000 -p 5000:5000 task-dashboard:1`
 
 Application is running on [http://localhost:8000](http://localhost:8000)
